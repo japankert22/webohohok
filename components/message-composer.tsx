@@ -41,8 +41,8 @@ export function UzenetSzerkeszto({
 
   return (
     <section aria-label="Uzenet Szerkeszto">
-      <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-        {"Uzenet Szerkeszt\u0151"}
+      <h2 className="text-xs uppercase tracking-widest text-foreground font-bold mb-3">
+        {"Üzenet Szerkesztő"}
       </h2>
       <div className="space-y-3">
         
@@ -158,31 +158,33 @@ export function UzenetSzerkeszto({
           </div>
         )}
 
-        {/* Stilus Segedlet - kulon lenyithato szekciokent */}
-        <button
-          type="button"
-          onClick={() => setStilusNyitva(!stilusNyitva)}
-          className="w-full flex items-center justify-between border border-border bg-secondary px-3 py-2.5"
-        >
-          <span className="text-xs text-muted-foreground">
-            {"St\u00edlus Seg\u00e9dlet (Markdown)"}
-          </span>
-          <ChevronDown
-            size={14}
-            className={`text-muted-foreground transition-transform duration-200 ${stilusNyitva ? "rotate-180" : ""}`}
-          />
-        </button>
+        {/* Stilus Segedlet - kulon lenyithato szekciokent, ugyanolyan mint Embed/Spam */}
+        <div className="border border-border bg-secondary/50">
+          <button
+            type="button"
+            onClick={() => setStilusNyitva(!stilusNyitva)}
+            className="w-full flex items-center justify-between px-3 py-2.5"
+          >
+            <span className="text-xs text-muted-foreground">
+              {"St\u00edlus Seg\u00e9dlet (Markdown)"}
+            </span>
+            <ChevronDown
+              size={14}
+              className={`text-muted-foreground transition-transform duration-200 ${stilusNyitva ? "rotate-180" : ""}`}
+            />
+          </button>
 
-        {stilusNyitva && (
-          <div className="border border-border bg-secondary/50 p-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground animate-in fade-in-0 slide-in-from-top-1 duration-200">
-            <p>{"Vastag: "}<span className="text-foreground font-bold">**{"sz\u00f6veg"}**</span></p>
-            <p>{"D\u0151lt: "}<span className="text-foreground italic">*{"sz\u00f6veg"}*</span></p>
-            <p>{"\u00c1th\u00fazott: "}<span className="text-foreground line-through">~~{"sz\u00f6veg"}~~</span></p>
-            <p>{"Al\u00e1h\u00fazott: "}<span className="text-foreground underline">__{"sz\u00f6veg"}__</span></p>
-            <p>{"K\u00f3d: "}<code className="text-green-500 bg-background px-1 py-0.5 border border-border">{"`sz\u00f6veg`"}</code></p>
-            <p>{"Id\u00e9zet: "}<span className="text-foreground">{">"} {"sz\u00f6veg"}</span></p>
-          </div>
-        )}
+          {stilusNyitva && (
+            <div className="border-t border-border p-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground animate-in fade-in-0 slide-in-from-top-1 duration-200">
+              <p>{"Vastag: "}<span className="text-foreground font-bold">{"**sz\u00f6veg**"}</span></p>
+              <p>{"D\u0151lt: "}<span className="text-foreground italic">{"*sz\u00f6veg*"}</span></p>
+              <p>{"\u00c1th\u00fazott: "}<span className="text-foreground line-through">{"~~sz\u00f6veg~~"}</span></p>
+              <p>{"Al\u00e1h\u00fazott: "}<span className="text-foreground underline">{"__sz\u00f6veg__"}</span></p>
+              <p>{"K\u00f3d: "}<code className="text-green-500 bg-background px-1 py-0.5 border border-border">{"`sz\u00f6veg`"}</code></p>
+              <p>{"Id\u00e9zet: "}<span className="text-foreground">{"> sz\u00f6veg"}</span></p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

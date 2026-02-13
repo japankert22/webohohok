@@ -167,7 +167,7 @@ export default function Fooldal() {
 
   return (
     <main className="min-h-screen flex items-start justify-center px-4 py-10">
-      <div className="w-full max-w-[1100px]">
+      <div className="w-full max-w-[1100px] mx-auto">
         {/* Fejlec */}
         <div className="border border-border bg-card border-b-0">
           <div className="border-b border-border px-5 py-4 flex items-center gap-3">
