@@ -11,6 +11,10 @@ interface UzenetSzerkesztoProps {
   setEmbedSzin: (v: string) => void
   lablecSzoveg: string
   setLablecSzoveg: (v: string) => void
+  fejlecSzoveg: string      // ÚJ: Fejléc prop
+  setFejlecSzoveg: (v: string) => void
+  egyediIdopont: string     // ÚJ: Időpont prop
+  setEgyediIdopont: (v: string) => void
 }
 
 export function UzenetSzerkeszto({
@@ -22,6 +26,10 @@ export function UzenetSzerkeszto({
   setEmbedSzin,
   lablecSzoveg,
   setLablecSzoveg,
+  fejlecSzoveg,         // ÚJ
+  setFejlecSzoveg,      // ÚJ
+  egyediIdopont,        // ÚJ
+  setEgyediIdopont,     // ÚJ
 }: UzenetSzerkesztoProps) {
   return (
     <section aria-label="Üzenet Szerkesztő">
@@ -29,10 +37,10 @@ export function UzenetSzerkeszto({
         Üzenet Szerkesztő
       </h2>
       <div className="space-y-3">
+        
+        {/* Sima üzenet törzs */}
         <div>
-          <label htmlFor="uzenet-tartalom" className="sr-only">
-            Üzenet Tartalom
-          </label>
+          <label htmlFor="uzenet-tartalom" className="sr-only">Üzenet Tartalom</label>
           <textarea
             id="uzenet-tartalom"
             rows={5}
@@ -43,6 +51,7 @@ export function UzenetSzerkeszto({
           />
         </div>
 
+        {/* Embed Kapcsoló */}
         <div className="flex items-center justify-between border border-border bg-secondary px-3 py-2.5">
           <label htmlFor="embed-valto" className="text-xs text-muted-foreground cursor-pointer">
             Embed Stílus Használata
@@ -55,63 +64,77 @@ export function UzenetSzerkeszto({
           />
         </div>
 
+        {/* Embed Beállítások (Fejléc, Lábléc, Szín, Idő) */}
         {embedHasznalata && (
-          <div>
-            <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Fejléc Szöveg</label>
-            <input
-              type="text"
-              placeholder="Embed címe..."
-              value={fejlecSzoveg}
-              onChange={(e) => setFejlecSzoveg(e.target.value)}
-              className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
-          />
-          </div>
-          <div className="grid grid-cols-2 gap-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
+          <div className="space-y-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
+            
+            {/* Fejléc */}
             <div>
-              <label htmlFor="embed-szin" className="block text-xs text-muted-foreground mb-1">
-                Embed Szín
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                Fejléc Szöveg (Cím)
               </label>
-              <div className="flex items-center gap-2 bg-secondary border border-border px-3 py-2">
+              <input
+                type="text"
+                placeholder="Embed címe..."
+                value={fejlecSzoveg}
+                onChange={(e) => setFejlecSzoveg(e.target.value)}
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
+              />
+            </div>
+
+            {/* Szín és Lábléc (Egy sorban) */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="embed-szin" className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                  Embed Szín
+                </label>
+                <div className="flex items-center gap-2 bg-secondary border border-border px-3 py-2">
+                  <input
+                    type="color"
+                    value={embedSzin}
+                    onChange={(e) => setEmbedSzin(e.target.value)}
+                    className="w-6 h-6 border-0 bg-transparent cursor-pointer p-0"
+                    aria-label="Embed szín választó"
+                  />
+                  <input
+                    id="embed-szin"
+                    type="text"
+                    value={embedSzin}
+                    onChange={(e) => setEmbedSzin(e.target.value)}
+                    className="flex-1 bg-transparent text-sm text-foreground focus:outline-none uppercase"
+                    maxLength={7}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="lablec-szoveg" className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                  Lábléc Szöveg
+                </label>
                 <input
-                  type="color"
-                  value={embedSzin}
-                  onChange={(e) => setEmbedSzin(e.target.value)}
-                  className="w-6 h-6 border-0 bg-transparent cursor-pointer p-0"
-                  aria-label="Embed szín választó"
-                />
-                <input
-                  id="embed-szin"
+                  id="lablec-szoveg"
                   type="text"
-                  value={embedSzin}
-                  onChange={(e) => setEmbedSzin(e.target.value)}
-                  className="flex-1 bg-transparent text-sm text-foreground focus:outline-none uppercase"
-                  maxLength={7}
+                  placeholder="Opcionális lábléc..."
+                  value={lablecSzoveg}
+                  onChange={(e) => setLablecSzoveg(e.target.value)}
+                  className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
                 />
               </div>
             </div>
+
+            {/* Egyedi Időpont */}
             <div>
-              <label htmlFor="lablec-szoveg" className="block text-xs text-muted-foreground mb-1">
-                Lábléc Szöveg
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                Egyedi Időpont (Timestamp)
               </label>
-              <input
-                id="lablec-szoveg"
-                type="text"
-                placeholder="Opcionális lábléc..."
-                value={lablecSzoveg}
-                onChange={(e) => setLablecSzoveg(e.target.value)}
-                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Egyedi Időpont</label>
               <input
                 type="datetime-local"
                 value={egyediIdopont}
                 onChange={(e) => setEgyediIdopont(e.target.value)}
-                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
               />
             </div>
+            
           </div>
         )}
       </div>
