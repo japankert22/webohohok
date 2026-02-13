@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, fejlecSzoveg, egyediIdopont } = body
+    const { webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, fejlecSzoveg, egyediIdopont, embedKulsoSzoveg } = body
 
     if (!webhookUrl || !tartalom) {
       return NextResponse.json({ error: "Hiányzó webhook URL vagy tartalom" }, { status: 400 })
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     // Payload összeállítás
     const payload: Record<string, unknown> = {
-      content: embedHasznalata ? undefined : tartalom,
+      content: embedHasznalata ? (embedKulsoSzoveg || undefined) : tartalom,
     }
 
     if (megpitoNev) payload.username = megpitoNev

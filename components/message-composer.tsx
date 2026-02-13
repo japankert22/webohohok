@@ -13,8 +13,10 @@ interface UzenetSzerkesztoProps {
   setLablecSzoveg: (v: string) => void
   fejlecSzoveg: string      // ÚJ
   setFejlecSzoveg: (v: string) => void
-  egyediIdopont: string     // ÚJ
+  egyediIdopont: string
   setEgyediIdopont: (v: string) => void
+  embedKulsoSzoveg: string
+  setEmbedKulsoSzoveg: (v: string) => void
 }
 
 export function UzenetSzerkeszto({
@@ -28,8 +30,10 @@ export function UzenetSzerkeszto({
   setLablecSzoveg,
   fejlecSzoveg,         // ÚJ
   setFejlecSzoveg,      // ÚJ
-  egyediIdopont,        // ÚJ
-  setEgyediIdopont,     // ÚJ
+  egyediIdopont,
+  setEgyediIdopont,
+  embedKulsoSzoveg,
+  setEmbedKulsoSzoveg,
 }: UzenetSzerkesztoProps) {
   return (
     <section aria-label="Üzenet Szerkesztő">
@@ -64,10 +68,26 @@ export function UzenetSzerkeszto({
 
         {embedHasznalata && (
           <div className="space-y-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
+
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                Embed Kiv&#252;li Sz&#246;veg (Content)
+              </label>
+              <input
+                type="text"
+                placeholder="pl. @everyone, @here, vagy b&#225;rmilyen sz&#246;veg..."
+                value={embedKulsoSzoveg}
+                onChange={(e) => setEmbedKulsoSzoveg(e.target.value)}
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
+              />
+              <p className="text-[10px] text-muted-foreground mt-1">
+                {"Ez a sz\u00f6veg az embed F\u00d6L\u00d6TT jelenik meg (opcion\u00e1lis)"}
+              </p>
+            </div>
             
             <div>
               <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
-                Fejléc Szöveg (Cím)
+                Fejl&#233;c Sz&#246;veg (C&#237;m)
               </label>
               <input
                 type="text"
