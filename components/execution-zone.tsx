@@ -1,12 +1,13 @@
 "use client"
 
 import { Switch } from "@/components/ui/switch"
+import { Play, Square } from "lucide-react"
 
 interface VegrehajtasZonaProps {
   onVegrehajtas: () => void
+  onStop: () => void
   vegrehajtas: boolean
   spamBekapcsolva: boolean
-  onStop: () => void
   setSpamBekapcsolva: (v: boolean) => void
   spamIntervallum: number
   setSpamIntervallum: (v: number) => void
@@ -15,101 +16,49 @@ interface VegrehajtasZonaProps {
 }
 
 export function VegrehajtasZona({
-  onVegrehajtas,
-  vegrehajtas,
-  spamBekapcsolva,
-  setSpamBekapcsolva,
-  spamIntervallum,
-  setSpamIntervallum,
-  spamDarab,
-  setSpamDarab,
+  onVegrehajtas, onStop, vegrehajtas, spamBekapcsolva,
+  setSpamBekapcsolva, spamIntervallum, setSpamIntervallum,
+  spamDarab, setSpamDarab
 }: VegrehajtasZonaProps) {
   return (
-    <section aria-label="Végrehajtás Zóna">
-      <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
-        Végrehajtás Zóna
-      </h2>
-      <div className="space-y-3">
+    <section className="space-y-4">
+      <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Végrehajtás Vezérlő</h2>
+      
+      {/* DINAMIKUS GOMB: Ha nem fut, kék Indítás. Ha fut, piros STOP. */}
+      {!vegrehajtas ? (
         <button
           onClick={onVegrehajtas}
-          disabled={vegrehajtas}
-          className="w-full relative py-3 text-sm font-bold uppercase tracking-wider bg-primary text-primary-foreground border border-primary/50 transition-all hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(34,197,94,0.15)] hover:shadow-[0_0_25px_rgba(34,197,94,0.3)]"
+          className="w-full flex items-center justify-center gap-2 py-4 text-sm font-bold uppercase tracking-wider bg-primary text-primary-foreground border border-primary/50 transition-all hover:brightness-110 shadow-[0_0_15px_rgba(34,197,94,0.1)]"
         >
-        {vegrehajtas ? (
-          <button onClick={onVegrehajtas} className="w-full py-4 bg-primary text-primary-foreground font-bold uppercase">
-            Webhook Indítása
-          </button>
-        ) : (
-          <button onClick={onStop} className="w-full py-4 bg-red-600 text-white font-black uppercase animate-pulse">
-            WEBHOOK LEÁLLÍTÁSA
-          </button>
-        )}
+          <Play size={16} fill="currentColor" /> Webhook Indítása
         </button>
+      ) : (
+        <button
+          onClick={onStop}
+          className="w-full flex items-center justify-center gap-2 py-4 text-sm font-black uppercase tracking-widest bg-red-600 text-white border border-red-400 animate-pulse hover:bg-red-700 transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)]"
+        >
+          <Square size={16} fill="currentColor" /> WEBHOOK LEÁLLÍTÁSA
+        </button>
+      )}
 
-        <div className="border border-border bg-secondary p-3 space-y-3">
-          <div className="flex items-center justify-between">
-            <label htmlFor="spam-valto" className="text-xs text-muted-foreground cursor-pointer">
-              Spam Beállítások
-            </label>
-            <Switch
-              id="spam-valto"
-              checked={spamBekapcsolva}
-              onCheckedChange={setSpamBekapcsolva}
-              className="data-[state=checked]:bg-primary"
-            />
-          </div>
-
-          {spamBekapcsolva && (
-            <div className="space-y-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="spam-intervallum" className="block text-xs text-muted-foreground mb-1">
-                    Időköz (ms)
-                  </label>
-                  <input
-                    id="spam-intervallum"
-                    type="number"
-                    min={1}
-                    value={spamIntervallum}
-                    onChange={(e) => {
-                      const ertek = Number(e.target.value)
-                      setSpamIntervallum(ertek < 1 ? 1 : ertek)
-                    }}
-                    className="w-full bg-background border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="spam-darab" className="block text-xs text-muted-foreground mb-1">
-                    Üzenetek Száma
-                  </label>
-                  <input
-                    id="spam-darab"
-                    type="number"
-                    min={1}
-                    value={spamDarab}
-                    onChange={(e) => {
-                      const ertek = Number(e.target.value)
-                      setSpamDarab(ertek < 1 ? 1 : ertek)
-                    }}
-                    className="w-full bg-background border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
-                  />
-                </div>
-              </div>
-
-              {/* Ajánlások */}
-              <div className="border border-border/50 bg-background/50 px-3 py-2 space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-yellow-400/80 font-bold">Ajánlott beállítások</p>
-                <ul className="text-[10px] text-muted-foreground space-y-0.5 list-none">
-                  <li>{'>'} Ajánlott időköz: 1000-5000ms (Discord limit: ~5 üzenet/5mp)</li>
-                  <li>{'>'} Ajánlott darabszám: 10-20 db egymás után</li>
-                  <li>{'>'} Túl gyors küldés = webhook törlése a Discord által</li>
-                  <li>{'>'} Rate limit esetén az állapot konzol figyelmeztet</li>
-                  <li>{'>'} Nincs korlátozás, de a konzol kiírja a kockázatot</li>
-                </ul>
-              </div>
-            </div>
-          )}
+      <div className="border border-border bg-secondary/50 p-4 space-y-4">
+        <div className="flex items-center justify-between">
+          <label htmlFor="spam-valto" className="text-[10px] uppercase font-bold text-muted-foreground">Spam Beállítások</label>
+          <Switch id="spam-valto" checked={spamBekapcsolva} onCheckedChange={setSpamBekapcsolva} />
         </div>
+
+        {spamBekapcsolva && (
+          <div className="grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-1 duration-200">
+            <div className="space-y-1">
+              <label className="text-[9px] uppercase text-zinc-500">Időköz (ms)</label>
+              <input type="number" min={1} value={spamIntervallum} onChange={e => setSpamIntervallum(Number(e.target.value))} className="w-full bg-background border border-border px-3 py-2 text-sm font-mono" />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[9px] uppercase text-zinc-500">Mennyiség</label>
+              <input type="number" min={1} value={spamDarab} onChange={e => setSpamDarab(Number(e.target.value))} className="w-full bg-background border border-border px-3 py-2 text-sm font-mono" />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
