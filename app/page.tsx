@@ -39,13 +39,13 @@ export default function Fooldal() {
     const valasz = await fetch("/api/webhook", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg }),
+      body: JSON.stringify({ webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, egyediIdopont, fejlecSzoceg }),
     })
     const adat = await valasz.json()
     if (valasz.status === 429) return { rateLimited: true, retryAfter: adat.retryAfter || 5 }
     if (!valasz.ok) throw new Error(adat.error || "Kérés sikertelen")
     return { success: true }
-  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, egyediIdopont])
+  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, egyediIdopont, fejlecSzoceg])
 
   const vegrehajtasInditasa = useCallback(async () => {
     if (!webhookUrl.trim() || !tartalom.trim()) {
