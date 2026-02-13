@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 export interface NaploBejegyzes {
   type: "RENDSZER" | "INFO" | "HIBA" | "SIKERES" | "FIGYELEM"
@@ -9,27 +9,15 @@ export interface NaploBejegyzes {
 }
 
 const cimkeSzinek: Record<NaploBejegyzes["type"], string> = {
-  RENDSZER: "text-muted-foreground",
+  RENDSZER: "text-zinc-500",
   INFO: "text-blue-400",
-  HIBA: "text-red-400",
+  HIBA: "text-red-500 font-bold",
   SIKERES: "text-green-400",
-  FIGYELEM: "text-yellow-400",
-}
-
-function idoFormazas(datum: Date): string {
-  const o = datum.getHours().toString().padStart(2, "0")
-  const p = datum.getMinutes().toString().padStart(2, "0")
-  const mp = datum.getSeconds().toString().padStart(2, "0")
-  return `${o}:${p}:${mp}`
+  FIGYELEM: "text-yellow-500",
 }
 
 export function AllapotKonzol({ naplok }: { naplok: NaploBejegyzes[] }) {
   const gorgetesRef = useRef<HTMLDivElement>(null)
-  const [csatlakozott, setCsatlakozott] = useState(false)
-
-  useEffect(() => {
-    setCsatlakozott(true)
-  }, [])
 
   useEffect(() => {
     if (gorgetesRef.current) {
@@ -38,29 +26,23 @@ export function AllapotKonzol({ naplok }: { naplok: NaploBejegyzes[] }) {
   }, [naplok])
 
   return (
-    <section aria-label="Állapot Konzol">
-      <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-        Állapot Konzol
-      </h2>
+    <section>
+      <h2 className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2 font-bold">Rendszer Napló</h2>
       <div
         ref={gorgetesRef}
-        className="h-36 overflow-y-auto border border-border bg-[#050505] p-3 text-xs leading-relaxed"
-        role="log"
-        aria-live="polite"
+        className="h-48 overflow-y-auto border border-zinc-800 bg-black/80 p-4 text-[11px] font-mono leading-relaxed"
       >
         {naplok.map((naplo, i) => {
-          const ido = csatlakozott ? idoFormazas(naplo.timestamp) : "--:--:--"
+          const ido = naplo.timestamp.toLocaleTimeString()
           return (
-            <div key={i} className="whitespace-pre-wrap">
-              <span className="text-muted-foreground">{ido}</span>{" "}
-              <span className={cimkeSzinek[naplo.type]}>[{naplo.type}]</span>{" "}
-              <span className="text-foreground">{naplo.message}</span>
+            <div key={i} className="mb-1 flex gap-2 items-start">
+              <span className="text-zinc-600 shrink-0">[{ido}]</span>
+              <span className={`${cimkeSzinek[naplo.type]} shrink-0 uppercase`}>[{naplo.type}]</span>
+              <span className="text-zinc-300">{naplo.message}</span>
             </div>
           )
         })}
-        {naplok.length === 0 && (
-          <span className="text-muted-foreground">{">"} Várakozás bemenetre...</span>
-        )}
+        {naplok.length === 0 && <span className="text-zinc-700 italic">{">"} Várakozás bemenetre...</span>}
       </div>
     </section>
   )
