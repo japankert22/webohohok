@@ -19,7 +19,7 @@ export function WebhookBeallitasok({
 }: WebhookBeallitasokProps) {
   return (
     <section aria-label="Webhook Beállítások">
-      <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+      <h2 className="text-xs uppercase tracking-widest text-foreground font-bold mb-3">
         Webhook Beállítások
       </h2>
       <div className="space-y-3">
