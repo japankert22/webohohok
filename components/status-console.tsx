@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 
 export interface NaploBejegyzes {
-  type: "RENDSZER" | "INFO" | "HIBA" | "SIKER" | "FIGYELEM"
+  type: "RENDSZER" | "INFO" | "HIBA" | "SIKERES" | "FIGYELEM"
   message: string
   timestamp: Date
 }
@@ -12,7 +12,7 @@ const cimkeSzinek: Record<NaploBejegyzes["type"], string> = {
   RENDSZER: "text-muted-foreground",
   INFO: "text-blue-400",
   HIBA: "text-red-400",
-  SIKER: "text-green-400",
+  SIKERES: "text-green-400",
   FIGYELEM: "text-yellow-400",
 }
 
