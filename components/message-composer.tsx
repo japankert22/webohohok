@@ -56,6 +56,16 @@ export function UzenetSzerkeszto({
         </div>
 
         {embedHasznalata && (
+          <div>
+            <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Fejléc Szöveg</label>
+            <input
+              type="text"
+              placeholder="Embed címe..."
+              value={fejlecSzoveg}
+              onChange={(e) => setFejlecSzoveg(e.target.value)}
+              className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
+          />
+          </div>
           <div className="grid grid-cols-2 gap-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
             <div>
               <label htmlFor="embed-szin" className="block text-xs text-muted-foreground mb-1">
@@ -90,6 +100,16 @@ export function UzenetSzerkeszto({
                 value={lablecSzoveg}
                 onChange={(e) => setLablecSzoveg(e.target.value)}
                 className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Egyedi Időpont</label>
+              <input
+                type="datetime-local"
+                value={egyediIdopont}
+                onChange={(e) => setEgyediIdopont(e.target.value)}
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
               />
             </div>
           </div>
