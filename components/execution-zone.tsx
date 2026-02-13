@@ -22,7 +22,7 @@ export function VegrehajtasZona({
 }: VegrehajtasZonaProps) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xs uppercase tracking-widest text-foreground font-bold mb-3">Végrehajtás Vezérlő</h2>
+      <h2 className="text-xs uppercase tracking-widest text-white font-bold mb-3">Végrehajtás Vezérlő</h2>
       
       {/* DINAMIKUS GOMB: Ha nem fut, kék Indítás. Ha fut, piros STOP. */}
       {!vegrehajtas ? (

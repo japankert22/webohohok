@@ -19,7 +19,7 @@ export function WebhookBeallitasok({
 }: WebhookBeallitasokProps) {
   return (
     <section aria-label="Webhook Beállítások">
-      <h2 className="text-xs uppercase tracking-widest text-foreground font-bold mb-3">
+      <h2 className="text-xs uppercase tracking-widest text-white font-bold mb-3">
         Webhook Beállítások
       </h2>
       <div className="space-y-3">
@@ -38,7 +38,7 @@ export function WebhookBeallitasok({
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor="megjelenitesi-nev" className="block text-xs text-muted-foreground mb-1">
+            <label htmlFor="megjelenitesi-nev" className="block text-xs text-zinc-400 mb-1">
               Megjelenítési Név
             </label>
             <input
@@ -51,7 +51,7 @@ export function WebhookBeallitasok({
             />
           </div>
           <div>
-            <label htmlFor="avatar-url" className="block text-xs text-muted-foreground mb-1">
+            <label htmlFor="avatar-url" className="block text-xs text-zinc-400 mb-1">
               Profilkép URL
             </label>
             <input

@@ -27,7 +27,7 @@ export function AllapotKonzol({ naplok }: { naplok: NaploBejegyzes[] }) {
 
   return (
     <section>
-      <h2 className="text-xs uppercase tracking-widest text-foreground font-bold mb-2">Rendszer Napló</h2>
+      <h2 className="text-xs uppercase tracking-widest text-white font-bold mb-2">Rendszer Napló</h2>
       <div
         ref={gorgetesRef}
         className="h-48 overflow-y-auto border border-zinc-800 bg-black/80 p-4 text-[11px] font-mono leading-relaxed"
