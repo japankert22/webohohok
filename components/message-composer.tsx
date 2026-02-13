@@ -11,9 +11,9 @@ interface UzenetSzerkesztoProps {
   setEmbedSzin: (v: string) => void
   lablecSzoveg: string
   setLablecSzoveg: (v: string) => void
-  fejlecSzoveg: string      // <-- EZEK HIÁNYOZTAK
+  fejlecSzoveg: string      // ÚJ
   setFejlecSzoveg: (v: string) => void
-  egyediIdopont: string     // <-- EZEK HIÁNYOZTAK
+  egyediIdopont: string     // ÚJ
   setEgyediIdopont: (v: string) => void
 }
 
@@ -26,10 +26,10 @@ export function UzenetSzerkeszto({
   setEmbedSzin,
   lablecSzoveg,
   setLablecSzoveg,
-  fejlecSzoveg,         // <-- EZEK HIÁNYOZTAK
-  setFejlecSzoveg,
-  egyediIdopont,        // <-- EZEK HIÁNYOZTAK
-  setEgyediIdopont,
+  fejlecSzoveg,         // ÚJ
+  setFejlecSzoveg,      // ÚJ
+  egyediIdopont,        // ÚJ
+  setEgyediIdopont,     // ÚJ
 }: UzenetSzerkesztoProps) {
   return (
     <section aria-label="Üzenet Szerkesztő">
@@ -37,10 +37,9 @@ export function UzenetSzerkeszto({
         Üzenet Szerkesztő
       </h2>
       <div className="space-y-3">
+        
         <div>
-          <label htmlFor="uzenet-tartalom" className="sr-only">
-            Üzenet Tartalom
-          </label>
+          <label htmlFor="uzenet-tartalom" className="sr-only">Üzenet Tartalom</label>
           <textarea
             id="uzenet-tartalom"
             rows={5}
@@ -65,20 +64,23 @@ export function UzenetSzerkeszto({
 
         {embedHasznalata && (
           <div className="space-y-3 animate-in fade-in-0 slide-in-from-top-1 duration-200">
+            
             <div>
-              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Fejléc Szöveg (Cím)</label>
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                Fejléc Szöveg (Cím)
+              </label>
               <input
                 type="text"
                 placeholder="Embed címe..."
                 value={fejlecSzoveg}
                 onChange={(e) => setFejlecSzoveg(e.target.value)}
-                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
               />
             </div>
-            
+
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label htmlFor="embed-szin" className="block text-xs text-muted-foreground mb-1">
+                <label htmlFor="embed-szin" className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
                   Embed Szín
                 </label>
                 <div className="flex items-center gap-2 bg-secondary border border-border px-3 py-2">
@@ -99,9 +101,9 @@ export function UzenetSzerkeszto({
                   />
                 </div>
               </div>
-              
+
               <div>
-                <label htmlFor="lablec-szoveg" className="block text-xs text-muted-foreground mb-1">
+                <label htmlFor="lablec-szoveg" className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
                   Lábléc Szöveg
                 </label>
                 <input
@@ -116,14 +118,17 @@ export function UzenetSzerkeszto({
             </div>
 
             <div>
-              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">Egyedi Időpont</label>
+              <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-tighter">
+                Egyedi Időpont (Timestamp)
+              </label>
               <input
                 type="datetime-local"
                 value={egyediIdopont}
                 onChange={(e) => setEgyediIdopont(e.target.value)}
-                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none"
+                className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
               />
             </div>
+            
           </div>
         )}
       </div>
