@@ -128,14 +128,14 @@ export default function Fooldal() {
               naploHozzaadas("HIBA", "Ismét rate limit. Küldés leállítva a webhook védelme érdekében.")
               break
             }
-            naploHozzaadas("SIKER", `Üzenet ${i + 1}/${osszesen} kézbesítve (újrapróbálkozás után).`)
+            naploHozzaadas("SIKERES", `Üzenet ${i + 1}/${osszesen} kézbesítve (újrapróbálkozás után).`)
           } catch (err2) {
             const uzenet2 = err2 instanceof Error ? err2.message : "Ismeretlen hiba"
             naploHozzaadas("HIBA", `Sikertelen újrapróbálkozás: ${uzenet2}`)
             break
           }
         } else {
-          naploHozzaadas("SIKER", `Üzenet ${i + 1}/${osszesen} kézbesítve.`)
+          naploHozzaadas("SIKERES", `Üzenet ${i + 1}/${osszesen} kézbesítve.`)
         }
       } catch (err) {
         const uzenet = err instanceof Error ? err.message : "Ismeretlen hiba"
@@ -203,6 +203,22 @@ export default function Fooldal() {
             spamDarab={spamDarab}
             setSpamDarab={setSpamDarab}
           />
+
+          <div className="border-t border-border" />
+
+          <section aria-label="Stílus Segédlet">
+            <h2 className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+              Stílus Segédlet (Markdown)
+            </h2>
+            <div className="border border-border bg-secondary p-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground">
+              <p>Vastag: <span className="text-foreground font-bold">**szöveg**</span></p>
+              <p>Dőlt: <span className="text-foreground italic">*szöveg*</span></p>
+              <p>Áthúzott: <span className="text-foreground line-through">~~szöveg~~</span></p>
+              <p>Aláhúzott: <span className="text-foreground underline">__szöveg__</span></p>
+              <p>Kód: <code className="text-green-500 bg-background px-1 py-0.5 border border-border">`szöveg`</code></p>
+              <p>Idézet: <span className="text-foreground">{">"} szöveg</span></p>
+            </div>
+          </section>
 
           <div className="border-t border-border" />
 
