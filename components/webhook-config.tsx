@@ -63,6 +63,15 @@ export function WebhookBeallitasok({
               className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
             />
           </div>
+          <div className="space-y-2">
+            <label className="text-xs text-muted-foreground uppercase font-bold">Egyedi Időpont</label>
+            <input 
+              type="datetime-local" 
+              value={egyediIdopont} 
+              onChange={(e) => setEgyediIdopont(e.target.value)}
+              className="w-full bg-background border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+          </div>
         </div>
       </div>
     </section>
