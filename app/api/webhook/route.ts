@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
         {
           description: tartalom,
           color: szinSzam,
+          timestamp: egyediIdopont,
           ...(lablecSzoveg ? { footer: { text: lablecSzoveg } } : {}),
         },
       ]
