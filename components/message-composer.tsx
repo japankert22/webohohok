@@ -128,6 +128,20 @@ export function UzenetSzerkeszto({
                 className="w-full bg-secondary border border-border px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-ring transition-colors"
               />
             </div>
+
+            <div className="border-t border-border pt-3">
+              <h3 className="text-xs text-muted-foreground uppercase tracking-tighter mb-2">
+                Stílus Segédlet (Markdown)
+              </h3>
+              <div className="border border-border bg-background p-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground">
+                <p>Vastag: <span className="text-foreground font-bold">**szöveg**</span></p>
+                <p>Dőlt: <span className="text-foreground italic">*szöveg*</span></p>
+                <p>Áthúzott: <span className="text-foreground line-through">~~szöveg~~</span></p>
+                <p>Aláhúzott: <span className="text-foreground underline">__szöveg__</span></p>
+                <p>Kód: <code className="text-green-500 bg-background px-1 py-0.5 border border-border">{"`szöveg`"}</code></p>
+                <p>Idézet: <span className="text-foreground">{">"} szöveg</span></p>
+              </div>
+            </div>
             
           </div>
         )}
