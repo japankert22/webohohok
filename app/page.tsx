@@ -19,6 +19,7 @@ export default function Fooldal() {
   // -- ÚJ VÁLTOZÓK AZ EMBEDHEZ --
   const [fejlecSzoveg, setFejlecSzoveg] = useState("")
   const [egyediIdopont, setEgyediIdopont] = useState("")
+  const [embedKulsoSzoveg, setEmbedKulsoSzoveg] = useState("")
 
   const [vegrehajtas, setVegrehajtas] = useState(false)
   const [spamBekapcsolva, setSpamBekapcsolva] = useState(false)
@@ -52,8 +53,9 @@ export default function Fooldal() {
         embedHasznalata,
         embedSzin,
         lablecSzoveg,
-        fejlecSzoveg, // ÚJ
-        egyediIdopont // ÚJ
+        fejlecSzoveg,
+        egyediIdopont,
+        embedKulsoSzoveg
       }),
     })
     const adat = await valasz.json()
@@ -64,7 +66,7 @@ export default function Fooldal() {
 
     if (!valasz.ok) throw new Error(adat.error || "Kérés sikertelen")
     return { success: true }
-  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, fejlecSzoveg, egyediIdopont])
+  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, fejlecSzoveg, egyediIdopont, embedKulsoSzoveg])
 
   const vegrehajtasInditasa = useCallback(async () => {
     if (!webhookUrl.trim()) {
@@ -202,8 +204,10 @@ export default function Fooldal() {
             setLablecSzoveg={setLablecSzoveg}
             fejlecSzoveg={fejlecSzoveg}           // ÚJ
             setFejlecSzoveg={setFejlecSzoveg}     // ÚJ
-            egyediIdopont={egyediIdopont}         // ÚJ
-            setEgyediIdopont={setEgyediIdopont}   // ÚJ
+            egyediIdopont={egyediIdopont}
+            setEgyediIdopont={setEgyediIdopont}
+            embedKulsoSzoveg={embedKulsoSzoveg}
+            setEmbedKulsoSzoveg={setEmbedKulsoSzoveg}
           />
 
           <div className="border-t border-border" />
