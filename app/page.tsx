@@ -18,7 +18,7 @@ export default function Fooldal() {
   
   // -- ÚJ VÁLTOZÓK AZ EMBEDHEZ --
   const [fejlecSzoveg, setFejlecSzoveg] = useState("")
-  const [egyediIdopont, setEgyediIdopont] = useState(new Date().toISOString().slice(0, 16))
+  const [egyediIdopont, setEgyediIdopont] = useState("")
 
   const [vegrehajtas, setVegrehajtas] = useState(false)
   const [spamBekapcsolva, setSpamBekapcsolva] = useState(false)
