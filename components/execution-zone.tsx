@@ -6,6 +6,7 @@ interface VegrehajtasZonaProps {
   onVegrehajtas: () => void
   vegrehajtas: boolean
   spamBekapcsolva: boolean
+  onStop: () => void
   setSpamBekapcsolva: (v: boolean) => void
   spamIntervallum: number
   setSpamIntervallum: (v: number) => void
@@ -34,14 +35,15 @@ export function VegrehajtasZona({
           disabled={vegrehajtas}
           className="w-full relative py-3 text-sm font-bold uppercase tracking-wider bg-primary text-primary-foreground border border-primary/50 transition-all hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(34,197,94,0.15)] hover:shadow-[0_0_25px_rgba(34,197,94,0.3)]"
         >
-          {vegrehajtas ? (
-            <span className="flex items-center justify-center gap-2">
-              <span className="inline-block w-3 h-3 border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin" />
-              Végrehajtás...
-            </span>
-          ) : (
-            "Webhook Indítása"
-          )}
+        {vegrehajtas ? (
+          <button onClick={onVegrehajtas} className="w-full py-4 bg-primary text-primary-foreground font-bold uppercase">
+            Webhook Indítása
+          </button>
+        ) : (
+          <button onClick={onStop} className="w-full py-4 bg-red-600 text-white font-black uppercase animate-pulse">
+            WEBHOOK LEÁLLÍTÁSA
+          </button>
+        )}
         </button>
 
         <div className="border border-border bg-secondary p-3 space-y-3">
