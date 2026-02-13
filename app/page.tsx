@@ -16,6 +16,7 @@ export default function Fooldal() {
   const [lablecSzoveg, setLablecSzoveg] = useState("")
   const [vegrehajtas, setVegrehajtas] = useState(false)
   const [spamBekapcsolva, setSpamBekapcsolva] = useState(false)
+  const [egyediIdopont, setEgyediIdopont] = useState(new Date().toISOString().slice(0, 16));
   const [spamIntervallum, setSpamIntervallum] = useState(1000)
   const [spamDarab, setSpamDarab] = useState(5)
   const [naplok, setNaplok] = useState<NaploBejegyzes[]>([
@@ -43,7 +44,7 @@ export default function Fooldal() {
     if (valasz.status === 429) return { rateLimited: true, retryAfter: adat.retryAfter || 5 }
     if (!valasz.ok) throw new Error(adat.error || "Kérés sikertelen")
     return { success: true }
-  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg])
+  }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg, egyediIdopont])
 
   const vegrehajtasInditasa = useCallback(async () => {
     if (!webhookUrl.trim() || !tartalom.trim()) {
