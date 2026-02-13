@@ -16,7 +16,7 @@ export default function Fooldal() {
   const [embedSzin, setEmbedSzin] = useState("#5865f2")
   const [lablecSzoveg, setLablecSzoveg] = useState("")
   
-  // EZEK HIÁNYOZTAK ITT IS!
+  // -- ÚJ VÁLTOZÓK AZ EMBEDHEZ --
   const [fejlecSzoveg, setFejlecSzoveg] = useState("")
   const [egyediIdopont, setEgyediIdopont] = useState(new Date().toISOString().slice(0, 16))
 
@@ -31,14 +31,14 @@ export default function Fooldal() {
 
   const megszakitasRef = useRef(false);
 
-  const stopFolyamat = useCallback(() => {
-    megszakitasRef.current = true;
-    naploHozzaadas("HIBA", "LEÁLLÍTÁS: A folyamat megállítva.");
-  }, []);
-
   const naploHozzaadas = useCallback((type: NaploBejegyzes["type"], message: string) => {
     setNaplok((elozo) => [...elozo, { type, message, timestamp: new Date() }])
   }, [])
+
+  const stopFolyamat = useCallback(() => {
+    megszakitasRef.current = true;
+    naploHozzaadas("HIBA", "LEÁLLÍTÁS: A folyamat megállítva.");
+  }, [naploHozzaadas]);
 
   const webhookKuldes = useCallback(async (): Promise<{ success?: boolean; rateLimited?: boolean; retryAfter?: number }> => {
     const valasz = await fetch("/api/webhook", {
@@ -200,10 +200,10 @@ export default function Fooldal() {
             setEmbedSzin={setEmbedSzin}
             lablecSzoveg={lablecSzoveg}
             setLablecSzoveg={setLablecSzoveg}
-            fejlecSzoveg={fejlecSzoveg}           // <-- ÁTADJUK AZ ADATOKAT
-            setFejlecSzoveg={setFejlecSzoveg}     // <-- ÁTADJUK AZ ADATOKAT
-            egyediIdopont={egyediIdopont}         // <-- ÁTADJUK AZ ADATOKAT
-            setEgyediIdopont={setEgyediIdopont}   // <-- ÁTADJUK AZ ADATOKAT
+            fejlecSzoveg={fejlecSzoveg}           // ÚJ
+            setFejlecSzoveg={setFejlecSzoveg}     // ÚJ
+            egyediIdopont={egyediIdopont}         // ÚJ
+            setEgyediIdopont={setEgyediIdopont}   // ÚJ
           />
 
           <div className="border-t border-border" />
