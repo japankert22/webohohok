@@ -167,66 +167,72 @@ export default function Fooldal() {
 
   return (
     <main className="min-h-screen flex items-start justify-center px-4 py-10">
-      <div className="w-full max-w-[600px] border border-border bg-card">
-        {/* Fejléc */}
-        <div className="border-b border-border px-5 py-4 flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 bg-red-500/80 rounded-full" aria-hidden="true" />
-            <span className="w-2.5 h-2.5 bg-yellow-500/80 rounded-full" aria-hidden="true" />
-            <span className="w-2.5 h-2.5 bg-green-500/80 rounded-full" aria-hidden="true" />
+      <div className="w-full max-w-[1100px]">
+        {/* Fejlec */}
+        <div className="border border-border bg-card border-b-0">
+          <div className="border-b border-border px-5 py-4 flex items-center gap-3">
+            <div className="flex gap-1.5">
+              <span className="w-2.5 h-2.5 bg-red-500/80 rounded-full" aria-hidden="true" />
+              <span className="w-2.5 h-2.5 bg-yellow-500/80 rounded-full" aria-hidden="true" />
+              <span className="w-2.5 h-2.5 bg-green-500/80 rounded-full" aria-hidden="true" />
+            </div>
+            <h1 className="text-xs uppercase tracking-widest text-muted-foreground">
+              {"Discord Webhook Vez\u00e9rl\u0151"}
+            </h1>
           </div>
-          <h1 className="text-xs uppercase tracking-widest text-muted-foreground">
-            Discord Webhook Vezérlő
-          </h1>
         </div>
 
-        {/* Tartalom */}
-        <div className="p-5 space-y-6">
-          <WebhookBeallitasok
-            webhookUrl={webhookUrl}
-            setWebhookUrl={setWebhookUrl}
-            megpitoNev={megpitoNev}
-            setMegpitoNev={setMegpitoNev}
-            avatarUrl={avatarUrl}
-            setAvatarUrl={setAvatarUrl}
-          />
+        {/* Ket oszlopos layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+          {/* Bal oldal: Webhook + Uzenet szerkeszto */}
+          <div className="border border-border bg-card p-5 space-y-6 lg:border-r-0">
+            <WebhookBeallitasok
+              webhookUrl={webhookUrl}
+              setWebhookUrl={setWebhookUrl}
+              megpitoNev={megpitoNev}
+              setMegpitoNev={setMegpitoNev}
+              avatarUrl={avatarUrl}
+              setAvatarUrl={setAvatarUrl}
+            />
 
-          <div className="border-t border-border" />
+            <div className="border-t border-border" />
 
-          <UzenetSzerkeszto
-            tartalom={tartalom}
-            setTartalom={setTartalom}
-            embedHasznalata={embedHasznalata}
-            setEmbedHasznalata={setEmbedHasznalata}
-            embedSzin={embedSzin}
-            setEmbedSzin={setEmbedSzin}
-            lablecSzoveg={lablecSzoveg}
-            setLablecSzoveg={setLablecSzoveg}
-            fejlecSzoveg={fejlecSzoveg}           // ÚJ
-            setFejlecSzoveg={setFejlecSzoveg}     // ÚJ
-            egyediIdopont={egyediIdopont}
-            setEgyediIdopont={setEgyediIdopont}
-            embedKulsoSzoveg={embedKulsoSzoveg}
-            setEmbedKulsoSzoveg={setEmbedKulsoSzoveg}
-          />
+            <UzenetSzerkeszto
+              tartalom={tartalom}
+              setTartalom={setTartalom}
+              embedHasznalata={embedHasznalata}
+              setEmbedHasznalata={setEmbedHasznalata}
+              embedSzin={embedSzin}
+              setEmbedSzin={setEmbedSzin}
+              lablecSzoveg={lablecSzoveg}
+              setLablecSzoveg={setLablecSzoveg}
+              fejlecSzoveg={fejlecSzoveg}
+              setFejlecSzoveg={setFejlecSzoveg}
+              egyediIdopont={egyediIdopont}
+              setEgyediIdopont={setEgyediIdopont}
+              embedKulsoSzoveg={embedKulsoSzoveg}
+              setEmbedKulsoSzoveg={setEmbedKulsoSzoveg}
+            />
+          </div>
 
-          <div className="border-t border-border" />
+          {/* Jobb oldal: Vegrehajtas + Spam + Naplo */}
+          <div className="border border-border bg-card p-5 space-y-6 lg:border-t">
+            <VegrehajtasZona
+              onVegrehajtas={vegrehajtasInditasa}
+              onStop={stopFolyamat}
+              vegrehajtas={vegrehajtas}
+              spamBekapcsolva={spamBekapcsolva}
+              setSpamBekapcsolva={setSpamBekapcsolva}
+              spamIntervallum={spamIntervallum}
+              setSpamIntervallum={setSpamIntervallum}
+              spamDarab={spamDarab}
+              setSpamDarab={setSpamDarab}
+            />
 
-          <VegrehajtasZona
-            onVegrehajtas={vegrehajtasInditasa} 
-            onStop={stopFolyamat} 
-            vegrehajtas={vegrehajtas}
-            spamBekapcsolva={spamBekapcsolva}
-            setSpamBekapcsolva={setSpamBekapcsolva}
-            spamIntervallum={spamIntervallum}
-            setSpamIntervallum={setSpamIntervallum}
-            spamDarab={spamDarab}
-            setSpamDarab={setSpamDarab}
-          />
+            <div className="border-t border-border" />
 
-          <div className="border-t border-border" />
-
-          <AllapotKonzol naplok={naplok} />
+            <AllapotKonzol naplok={naplok} />
+          </div>
         </div>
       </div>
     </main>
