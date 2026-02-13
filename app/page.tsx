@@ -25,7 +25,12 @@ export default function Fooldal() {
     { type: "RENDSZER", message: "Kész. Webhook beállításra vár.", timestamp: new Date() },
   ])
 
-  const megszakitasRef = useRef(false)
+const megszakitasRef = useRef(false);
+
+const stopFolyamat = useCallback(() => {
+  megszakitasRef.current = true;
+  naploHozzaadas("HIBA", "LEÁLLÍTÁS: A folyamat megállítva.");
+}, [naploHozzaadas]);
 
   const naploHozzaadas = useCallback((type: NaploBejegyzes["type"], message: string) => {
     setNaplok((elozo) => [...elozo, { type, message, timestamp: new Date() }])
@@ -56,6 +61,10 @@ export default function Fooldal() {
   }, [webhookUrl, megpitoNev, avatarUrl, tartalom, embedHasznalata, embedSzin, lablecSzoveg])
 
   const vegrehajtasInditasa = useCallback(async () => {
+
+    for (let i = 0; i < osszesen; i++) {
+      if (megszakitasRef.current) break; // Ez állítja meg a ciklust
+    
     if (!webhookUrl.trim()) {
       naploHozzaadas("HIBA", "Webhook URL megadása kötelező.")
       return
@@ -194,7 +203,8 @@ export default function Fooldal() {
           <div className="border-t border-border" />
 
           <VegrehajtasZona
-            onVegrehajtas={vegrehajtasInditasa}
+            onVegrehajtas={vegrehajtasInditasa} 
+            onStop={stopFolyamat} 
             vegrehajtas={vegrehajtas}
             spamBekapcsolva={spamBekapcsolva}
             setSpamBekapcsolva={setSpamBekapcsolva}
