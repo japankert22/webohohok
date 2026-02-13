@@ -17,6 +17,7 @@ export default function Fooldal() {
   const [vegrehajtas, setVegrehajtas] = useState(false)
   const [spamBekapcsolva, setSpamBekapcsolva] = useState(false)
   const [egyediIdopont, setEgyediIdopont] = useState(new Date().toISOString().slice(0, 16));
+  const [fejlecSzoveg, setFejlecSzoveg] = useState("")
   const [spamIntervallum, setSpamIntervallum] = useState(1000)
   const [spamDarab, setSpamDarab] = useState(5)
   const [naplok, setNaplok] = useState<NaploBejegyzes[]>([
